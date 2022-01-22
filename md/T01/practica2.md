@@ -51,9 +51,12 @@ header-includes:
 ---
 # Crar una página web
 En este segundo ejercicio, crearemos una página web como la que aparece en la siguiente imagen.
+
+![Vista página web sin css](img/previo_2.png)
+
 El ejercicio es guiado y se indica todos los pasos a seguir para obtener el resultado esperado. En cualquier caso, si tienes conocimientos previos suficientes de HTML y CSS, es muy recomendable que antes de resolver el ejercicio de forma guiada, intentes resolverlo por ti mismo sin consultar la guía que se expone a continuación.
 
-[Imagen resultado final](img/resultado.jpg)
+![Imagen resultado final](img/resultado.jpg)
 
 Podéis encontrar todos los recursos necesarios en el fichero curso.zip del aula virtual. En este mismo fichero, encontraréis una imagen (resultado.jpg) en la que podéis observar cómo debe quedar el ejercicio.
 La estructura de la página será prácticamente igual a la del ejercicio anterior (la podéis ver en el fichero index.html), tendremos un **<div id="page">** que será el contenedor de toda la página, y dentro de este, tendremos los siguientes elementos:
