@@ -398,76 +398,77 @@ Dentro de la sección *main* tendremos lo siguiente:
 
 - Un **\<div\>** que contendrá el formulario y que tendrá el id contenedorFormulario. Dentro del **\<div\>** tendremos lo siguiente:
   
- - Un <h1> con el texto Contáctenos.
+ - Un **\<h1\>** con el texto Contáctenos.
  - Un formulario con los siguientes campos:
     1. Un campo para solicitar el nombre del usuario que quiere contactar. Este campo será obligatorio y contendrá el texto de ejemplo siguiente: "Escriba su nombre".
     2. Un campo para solicitar el correo electrónico del usuario. Este campo será obligatorio y contendrá el texto de ejemplo siguiente: "Escriba su email".
-    3. Un **<textarea>** para que el usuario escriba el mensaje que quiere enviar. Este campo será obligatorio y contendrá el texto de ejemplo siguiente: "Su mensaje…".
+    3. Un **\<textarea\>** para que el usuario escriba el mensaje que quiere enviar. Este campo será obligatorio y contendrá el texto de ejemplo siguiente: "Su mensaje…".
     4. Un botón submit para enviar los datos del formulario.
    
 Para que el formulario tome el aspecto que se muestra en la imagen, tendremos que aplicar una serie de estilos que crearemos en un fichero llamado *contacto.css* dentro de la carpeta css. Dentro de este fichero crearemos los siguientes estilos:
 
 - Sección main:
- - Pondremos la imagen de fondo fondoForm.jpg, indicando que la imagen abarque todo el espacio de la sección.
- - Sus contenidos estarán centrados.
+   - Pondremos la imagen de fondo fondoForm.jpg, indicando que la imagen abarque todo el espacio de la sección.
+   - Sus contenidos estarán centrados.
 - Contenedor del formulario:
- - La posiciÓn serÁ relativa.
- - Se mostrará como inline-block.
- - Márgenes de 50px.
- - Ancho 600px.
- - Margen interno superior e inferior 20px, izquierdo y derecho 50px.
- - Color de fondo rgb: 200, 200, 200 con una opacidad de 0.7.
- - Contenidos alineados a la izquierda.
- - Sombra de la caja con los siguientes valores: desplazamiento horizontal 3px, desplazamiento vertical 0px, distancia de difuminación 8px y color rgb: 0, 0, 0 con una opacidad de 0.4.
+   - La posiciÓn serÁ relativa.
+   - Se mostrará como inline-block.
+   - Márgenes de 50px.
+   - Ancho 600px.
+   - Margen interno superior e inferior 20px, izquierdo y derecho 50px.
+   - Color de fondo rgb: 200, 200, 200 con una opacidad de 0.7.
+   - Contenidos alineados a la izquierda.
+   - Sombra de la caja con los siguientes valores: desplazamiento horizontal 3px, desplazamiento vertical 0px, distancia de difuminación 8px y color rgb: 0, 0, 0 con una opacidad de 0.4.
 - Título del formulario:
- - Posición absoluta con una distancia al borde superior de -16px y al borde izquierdo de 490px.
- - Color de fondo rgb: 255, 255, 255 con una opacidad de 0.7.
- - Fuente Aguafina Script en cursiva y color #333. Esta fuente es una fuente de google, por lo que, debemos buscarla y enlazarla correctamente mediante un @import.
- - Espacio entre letras 5px.
- - Sombra del texto con distancia horizontal y vertical de 0px, radio de difuminación de 2px y color #777.
- - Márgenes internos superior e inferior de 0px e izquierdo y derecho de 10px.
-- Estilos comunes para todos los campos del formulario, excepto el botón:
- - Se mostrarán como inline-block.
- - Borde de 1px, estilo sólido y color #e5e5e5.
- - Tendrán dos sombras de caja3:
-    1. La primera con las siguientes características: Desplazamiento horizontal 0px, desplazamiento vertical 1px, distancia de difuminación 4px y color rgb: 0, 0, 0 con una opacidad de 0.3.
-    2. La segunda con las siguientes características: Desplazamiento horizontal 0px, desplazamiento vertical 0px, distancia de difuminación 40px y color rgb: 0, 0, 0 con una opacidad de 0.1. Esta sombra será interna (inset).
- - Color de fuente negro.
- - Fuente en negrita.
- - Márgenes internos superior e inferior de 1px, izquierdo 45px y derecho de 4px.
- - Margen inferior 10px.
- - Configuraremos una transición para el cambio de todas las propiedades de estos elementos de la siguiente forma: duración 0.4s, propiedad all, efecto ease-in.
+   - Posición absoluta con una distancia al borde superior de -16px y al borde izquierdo de 490px.
+   - Color de fondo rgb: 255, 255, 255 con una opacidad de 0.7.
+   - Fuente Aguafina Script en cursiva y color #333. Esta fuente es una fuente de google, por lo que, debemos buscarla y enlazarla correctamente mediante un @import.
+   - Espacio entre letras 5px.
+   - Sombra del texto con distancia horizontal y vertical de 0px, radio de difuminación de 2px y color #777.
+   - Márgenes internos superior e inferior de 0px e izquierdo y derecho de 10px.
+   - Estilos comunes para todos los campos del formulario, excepto el botón:
+   - Se mostrarán como inline-block.
+   - Borde de 1px, estilo sólido y color #e5e5e5.
+   - Tendrán dos sombras de caja3:
+        1. La primera con las siguientes características: Desplazamiento horizontal 0px, desplazamiento vertical 1px, distancia de difuminación 4px y color rgb: 0, 0, 0 con una opacidad de 0.3.
+        2. La segunda con las siguientes características: Desplazamiento horizontal 0px, desplazamiento vertical 0px, distancia de difuminación 40px y color rgb: 0, 0, 0 con una opacidad de 0.1. Esta sombra será interna (inset).
+   - Color de fuente negro.
+   - Fuente en negrita.
+   - Márgenes internos superior e inferior de 1px, izquierdo 45px y derecho de 4px.
+   - Margen inferior 10px.
+   - Configuraremos una transición para el cambio de todas las propiedades de estos elementos de la siguiente forma: duración 0.4s, propiedad all, efecto ease-in.
 - Estilos comunes para los campos nombre y correo:
- - Alto 32px.
- - Ancho 330px.
- - Al obtener el foco estos campos, se cambiará el ancho a 370px y la sombra de la caja que tendrá las siguientes características: Desplazamiento horizontal 0px, desplazamiento vertical 0px, distancia de difuminación 12px y color rgb: 255, 255, 255. (Como habíamos creado una transición para todos los campos, estos cambios serán animados).
- - El campo nombre tendrá la imagen de fondo *icon-nombre.png* y el campo correo *icon-correo.png*. No se repetirán y estarán colocadas a una distancia de 10px del borde izquierdo.
- - Al obtener el foco en uno de los dos campos pueden pasar dos cosas:
-    1. Que la validación del campo sea correcta, con lo que, además de la imagen indicada anteriormente, tendrá también la imagen valid.png como fondo, tampoco se repetirá y estará colocada a 390px del borde izquierdo.
-    2. Que la validación del campo no sea correcta, con lo que, además de la imagen indicada anteriormente, tendrá también la imagen invalid.png como fondo, tampoco se repetirá y estará colocada a 390px del borde izquierdo.
- - Si nos fijamos en la imagen, tanto el campo nombre como el campo correo tienen un asterisco ‘*’ a la derecha que indica que ambos campos son requeridos. Para hacer esto haremos lo siguiente:
-    1. En el documento html añaadiremos un **<label>** vacío a continuación del cada **<input>**.
-    2. En la hoja de estilos indicaremos una regla para seleccionar los input que sean requeridos y tengan un hermano adyacente de tipo **<label>**. En esta regla indicaremos que se añada después del elemento (::after) el contenido ‘ *’ (content: ‘ *’;).
+   - Alto 32px.
+   - Ancho 330px.
+   - Al obtener el foco estos campos, se cambiará el ancho a 370px y la sombra de la caja que tendrá las siguientes características: Desplazamiento horizontal 0px, desplazamiento vertical 0px, distancia de difuminación 12px y color rgb: 255, 255, 255. (Como habíamos creado una transición para todos los campos, estos cambios serán animados).
+   - El campo nombre tendrá la imagen de fondo *icon-nombre.png* y el campo correo *icon-correo.png*. No se repetirán y estarán colocadas a una distancia de 10px del borde izquierdo.
+   - Al obtener el foco en uno de los dos campos pueden pasar dos cosas:
+        1. Que la validación del campo sea correcta, con lo que, además de la imagen indicada anteriormente, tendrá también la imagen valid.png como fondo, tampoco se repetirá y estará colocada a 390px del borde izquierdo.
+        2. Que la validación del campo no sea correcta, con lo que, además de la imagen indicada anteriormente, tendrá también la imagen invalid.png como fondo, tampoco se repetirá y estará colocada a 390px del borde izquierdo.
+   - Si nos fijamos en la imagen, tanto el campo nombre como el campo correo tienen un asterisco ‘*’ a la derecha que indica que ambos campos son requeridos. Para hacer esto haremos lo siguiente:
+        1. En el documento html añaadiremos un **<label>** vacío a continuación del cada **<input>**.
+        2. En la hoja de estilos indicaremos una regla para seleccionar los input que sean requeridos y tengan un hermano adyacente de tipo **<label>**. En esta regla indicaremos que se añada después del elemento (::after) el contenido ‘ *’ (content: ‘ *’;).
 - Campo mensaje:
- - Fuente arial.
- - Tamaño de fuente 1em.
- - Ancho 90%.
- - Alto 150px.
- - Imagen de fondo icon-mensaje.png. No se repetirá y estará colocada a una distancia de 10px del borde izquierdo.
- - Al obtener el foco se cambiará la sombra de la caja como sigue: desplazamiento horizontal 0px, desplazamiento vertical 0px, distancia de difuminación 12px y color rgb: 255, 255, 255. (Como habíamos creado una transición para todos los campos, este cambio será animado).
+   - Fuente arial.
+   - Tamaño de fuente 1em.
+   - Ancho 90%.
+   - Alto 150px.
+   - Imagen de fondo icon-mensaje.png. No se repetirá y estará colocada a una distancia de 10px del borde izquierdo.
+   - Al obtener el foco se cambiará la sombra de la caja como sigue: desplazamiento horizontal 0px, desplazamiento vertical 0px, distancia de difuminación 12px y color rgb: 255, 255, 255. (Como habíamos creado una transición para todos los campos, este cambio será animado).
 - Botón enviar:
- - Márgenes superior e inferior de 10px, izquierdo y derecho de 0px.
- - Márgenes internos de 10px.
- - Borde de 1px, estilo sólido y color #434343.
- - Color de fuente blanco.
- - Como fondo le pondremos un gradiente de arriba abajo iniciando en el color #5e5e5e y acabando en el color #2a2a2a.
- - La sombra de la caja será así: desplazamiento horizontal 0px, desplazamiento vertical 1px, distancia de difuminación 1px, color #353535 y tipo de sombra inset.
- - Cursor del ratón pointer.
- - Al poner el ratón sobre el botón se pondrá el mismo gradiente de fondo, pero al contrario, es decir, en lugar de arriba abajo, de abajo arriba.
+   - Márgenes superior e inferior de 10px, izquierdo y derecho de 0px.
+   - Márgenes internos de 10px.
+   - Borde de 1px, estilo sólido y color #434343.
+   - Color de fuente blanco.
+   - Como fondo le pondremos un gradiente de arriba abajo iniciando en el color #5e5e5e y acabando en el color #2a2a2a.
+   - La sombra de la caja será así: desplazamiento horizontal 0px, desplazamiento vertical 1px, distancia de difuminación 1px, color #353535 y tipo de sombra inset.
+   - Cursor del ratón pointer.
+   - Al poner el ratón sobre el botón se pondrá el mismo gradiente de fondo, pero al contrario, es decir, en lugar de arriba abajo, de abajo arriba.
 
 Además de todo esto, el formulario tiene que validarse de la siguiente forma:
 - El campo nombre, tiene que ser uno de los siguientes: alex, juan, ana o pedro. Para ayudar a la entrada de usuario crearemos un **<datalist>** que contendrá estos nombres y asociaremos al campo. A medida que el usuario vaya pulsando teclas estando en el campo, se validará si el usuario que hay en el campo es uno de los válidos. Si al pulsar enviar el usuario no es válido se mostrará el mensaje de error "El usuario introducido no existe".
-El campo correo debe contener una dirección de correo de un dominio español, es decir, debe acabar en ".es". A medida que el usuario vaya pulsando teclas estando en el campo, se validará si el correo que hay en el campo es válido. Si al pulsar enviar el correo no es válido se mostrará el mensaje de error "Debes introducir una dirección de correo española (acabada en .es)".
+- El campo correo debe contener una dirección de correo de un dominio español, es decir, debe acabar en ".es". A medida que el usuario vaya pulsando teclas estando en el campo, se validará si el correo que hay en el campo es válido. Si al pulsar enviar el correo no es válido se mostrará el mensaje de error "Debes introducir una dirección de correo española (acabada en .es)".
+  
 Estas validaciones las realizaremos en un fichero JavaScript llamado *contacto.js*.
 Todos los ficheros (imágenes, fuentes, etc.) necesarios para la realización del ejercicio, los pod´wis encontrar en el fichero de recursos.
 
