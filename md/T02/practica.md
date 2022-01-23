@@ -1,9 +1,9 @@
 ---
 # Informació general del document
-title: Práctica T02 - HTML5 CCS3 
+title: Práctica T02 - Nuevos Elementos
 author: Javier Beteta
 date: 2022-01
-subject: HTML5 CSS3
+subject: HTML5 CSS3 Nuevos Elementos
 lang: es
 
 # Portada
