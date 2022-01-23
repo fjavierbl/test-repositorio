@@ -19,7 +19,11 @@ body {
 }
 
 #page {
-	width:960px;margin:0 auto;text-align:left;-webkit-box-shadow:20px 20px 20px gray;
+	width:960px;
+	margin:0 auto;
+	text-align:left;
+	/*-webkit-box-shadow:20px 20px 20px gray;*/
+	box-shadow:20px 20px 20px gray;
 }
 
 header {
@@ -120,7 +124,8 @@ footer {
 	padding: 15px;
 	background:-webkit-linear-gradient(bottom,#0170B9,#27AADE);
 	border-radius:0 0 20px 20px;
-	-webkit-box-shadow:20px 20px 20px gray;
+	/*-webkit-box-shadow:20px 20px 20px gray;*/
+	box-shadow:20px 20px 20px gray;
 }
 
 small, address {
