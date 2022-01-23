@@ -395,7 +395,9 @@ Para terminar, vamos a implementar la sección de contacto de nuestra página, q
 Podéis ver esta imagen con mejor resolución dentro del fichero de recursos (*contacto.jpg*).
 Lo primero que haremos será modificar las páginas *index.html* y *videos.html*, de forma que el enlace contacto apunte al documento *contacto.html*. Este documento será exactamente igual a los de las secciones de contenidos y vídeos, salvo dos excepciones: en la barra de navegación no habrá enlace en contacto y el contenido de la sección main será diferente.
 Dentro de la sección *main* tendremos lo siguiente:
-- Un **<div>** que contendrá el formulario y que tendrá el id contenedorFormulario. Dentro del **<div>** tendremos lo siguiente:
+
+- Un **\<div\>** que contendrá el formulario y que tendrá el id contenedorFormulario. Dentro del **\<div\>** tendremos lo siguiente:
+  
  - Un <h1> con el texto Contáctenos.
  - Un formulario con los siguientes campos:
     1. Un campo para solicitar el nombre del usuario que quiere contactar. Este campo será obligatorio y contendrá el texto de ejemplo siguiente: "Escriba su nombre".
