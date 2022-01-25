@@ -59,18 +59,18 @@ El ejercicio es guiado y se indica todos los pasos a seguir para obtener el resu
 ![Imagen resultado final](img/resultado.jpg)
 
 Podéis encontrar todos los recursos necesarios en el fichero curso.zip del aula virtual. En este mismo fichero, encontraréis una imagen (resultado.jpg) en la que podéis observar cómo debe quedar el ejercicio.
-La estructura de la página será prácticamente igual a la del ejercicio anterior (la podéis ver en el fichero index.html), tendremos un **<div id="page">** que será el contenedor de toda la página, y dentro de este, tendremos los siguientes elementos:
-- Un **<div id="header">** que contendrá un **<h1>** con el título de la página.
-- Un **<div id="nav">** que contendrá una lista desordenada con los enlaces del menú de navegación.
-- Un **<div id="content">** que contendrá tres **<div class="article">**.
-- Cada **<div class="article">** contendrá un **<div class="article_header">** que, a su vez, contendrá una imagen y un **<h2>** con el título del artículo. El **<div class="article">** también contendrá un par de párrafos de texto.
-- Después del **<div id="content">** tenemos un **<div id="footer">** con el pie de página que contendrá un párrafo de texto.
+La estructura de la página será prácticamente igual a la del ejercicio anterior (la podéis ver en el fichero index.html), tendremos un **\<div id="page"\>** que será el contenedor de toda la página, y dentro de este, tendremos los siguientes elementos:
+- Un **\<div id="header"\>** que contendrá un **\<h1\>** con el título de la página.
+- Un **\<div id="nav"\>** que contendrá una lista desordenada con los enlaces del menú de navegación.
+- Un **\<div id="content"\>** que contendrá tres **\<div class="article"\>**.
+- Cada **\<div class="article"\>** contendrá un **\<div class="article_header"\>** que, a su vez, contendrá una imagen y un **\<h2\>** con el título del artículo. El **\<div class="article"\>** también contendrá un par de párrafos de texto.
+- Después del **\<div id="content"\>** tenemos un **\<div id="footer"\>** con el pie de página que contendrá un párrafo de texto.
 
 Si visualizáis el fichero index.html en vuestro navegador, observaréis que la página no aparece como se muestra en la imagen. Esto es porque el fichero estilos.css de la carpeta css está vacío. Lo que tenéis que hacer en este ejercicio es completar los estilos necesarios para que la página se muestre como se espera.
 A continuación, veremos los estilos que debemos crear:
 
 - Utilizando el selector universal, configuraremos a 0px el margen interno y externo de todos los elementos.
-- Elemento <body>:
+- Elemento **\<body\>**:
   - Margen interno superior 20px.
   - Texto alineado al centro.
   - Imagen de fondo "../imgs/old_map.png". Para cambiar la imagen de fondo de un elemento, utilizaremos la propiedad background-image. Como el fichero de estilos está en la carpeta css y las imágenes en la carpeta imgs, tendremos que indicar la ruta relativa desde el lugar donde están los estilos hasta el lugar donde están las imágenes, en este caso "../imgs/old_map.png". Cuando indicamos la ruta de un recurso en un fichero de estilos, debemos utilizar la función url, por lo tanto, para cambiar la imagen de fondo, haremos lo siguiente: background-image: url("../imgs/old_map.png");
@@ -84,15 +84,15 @@ A continuación, veremos los estilos que debemos crear:
      - El color de fondo será #313B44.
 - Si observamos la cabecera de la página, junto al título de la misma aparece la siguiente imagen:
 
-![Imagen logp](img/logo.png)
+![Imagen logo](img/logo.png)
 
-Vemos que en el archivo index.html no tenemos ningún elemento **<img>**, así que, podemos deducir que esta imagen se encuentra en los estilos de la página. En general, cuando una imagen tiene más relación con el aspecto visual de la página que con los contenidos de la misma, la introduciremos siempre por medio de los estilos.
-Veamos cómo debemos configurar los estilos del elemento **<h1>** para conseguir esta apariencia:
+Vemos que en el archivo index.html no tenemos ningún elemento **\<img\>**, así que, podemos deducir que esta imagen se encuentra en los estilos de la página. En general, cuando una imagen tiene más relación con el aspecto visual de la página que con los contenidos de la misma, la introduciremos siempre por medio de los estilos.
+Veamos cómo debemos configurar los estilos del elemento **\<h1\>** para conseguir esta apariencia:
 
   - La imagen de fondo será "../imgs/logo.png".
   - Por defecto, cuando colocamos una imagen de fondo pequeña en un elemento más grande, la imagen se repetirá en mosaico hasta rellenar todo el elemento. Para controlar este comportamiento disponemos de la propiedad background-repeat. Como en este caso nos interesa que la imagen no se repita, asignaremos el valor no-repeat. (Para más información sobre esta propiedad, podéis consultar [background-repeat](http://www.w3schools.com/cssref/pr_background-repeat.asp).
   - Cuando una imagen de fondo no se repite, podemos indicar en qué posición queremos que aparezca utilizando la propiedad background-position. En este caso, nos interesa que aparezca desplazada 25px a la izquierda y centrada verticalmente, por lo tanto, indicaremos los siguientes valores: background-position: 25px center;. (Para más información sobre esta propiedad, podéis consultar [background-position](http://www.w3schools.com/cssref/pr_background-position.asp)
-  - Si observamos la página en este momento, veremos que el texto del elemento **<h1>** se coloca sobre la imagen de fondo, lo cual, no es muy apropiado. Para solucionar este problema, le pondremos unos márgenes internos superior e inferior de 20px y unos márgenes internos izquierdo y derecho de 100px.
+  - Si observamos la página en este momento, veremos que el texto del elemento **\<h1\>** se coloca sobre la imagen de fondo, lo cual, no es muy apropiado. Para solucionar este problema, le pondremos unos márgenes internos superior e inferior de 20px y unos márgenes internos izquierdo y derecho de 100px.
   
 - Elemento nav:
      - La fuente será courier de tamaño 1.4em y color silver.
@@ -100,7 +100,7 @@ Veamos cómo debemos configurar los estilos del elemento **<h1>** para conseguir
      - La imagen de fondo será una textura que se repetirá hasta rellenar todo el elemento: "../imgs/red015.jpg".
 
 - Veamos ahora como cambiaremos la lista de enlaces que se encuentra dentro del elemento nav para que tome el aspecto que nos interesa:
-     - Para los elementos **<li>** de la lista desordenada tendremos una parte común para todos ellos y otra individual, ya que, cada opción de menú tiene una imagen distinta. Por este motivo, hemos puesto un id a cada uno de ellos. Veamos, en primer lugar, los estilos comunes que tienen los **<li>** que están dentro del *nav*:
+     - Para los elementos **\<li\>** de la lista desordenada tendremos una parte común para todos ellos y otra individual, ya que, cada opción de menú tiene una imagen distinta. Por este motivo, hemos puesto un id a cada uno de ellos. Veamos, en primer lugar, los estilos comunes que tienen los **\<li\>** que están dentro del *nav*:
           - Necesitamos tener espacio suficiente para que nos quepan las imágenes de cada uno de los enlaces, por lo tanto, le pondremos un margen interno superior de 80px.
           - Los márgenes externos los configuraremos de la siguiente forma: superior 0px, derecho 100px, inferior 20px e izquierdo 100px.
           - Eliminaremos el bullet o viñeta que coloca el navegador por defecto en las listas.
@@ -108,7 +108,7 @@ Veamos cómo debemos configurar los estilos del elemento **<h1>** para conseguir
           - El texto estará centrado.
           - Colocaremos el cursor por defecto para que cuando situemos el ratón sobre el elemento sin enlace aparezca el cursor adecuado.
 
-     - En cada uno de los elementos **<li>** debemos colocar la imagen adecuada, para ello, utilizaremos los identificadores de los mismos para seleccionarlos:
+     - En cada uno de los elementos **\<li\>** debemos colocar la imagen adecuada, para ello, utilizaremos los identificadores de los mismos para seleccionarlos:
           - Elemento contenidos: Imagen "../imgs/book.png", eliminar repetición y posición centrada horizontalmente y a 10px del borde superior.
           - Elemento videos: Imagen "../imgs/film.png", eliminar repetición y posición centrada horizontalmente y a 10px del borde superior.
           - Elemento contacto: Imagen "../imgs/mail.png", eliminar repetición y posición centrada horizontalmente y a 10px del borde superior.
@@ -141,7 +141,7 @@ Veamos cómo debemos configurar los estilos del elemento **<h1>** para conseguir
      - Elementos de la clase *article_header*:
           - Borde inferior de 1px sólido y color *#999999*.
 
-     - Elementos <h2>:
+     - Elementos **\<h2\>**:
           - Márgenes internos 10px.
           - Tamaño de fuente 1.2em.
      - Elemento footer:
