@@ -55,7 +55,7 @@ header-includes:
 
 Hoy en día es de lo más común descargar y ver vídeo dentro del navegador web. Conforme el ancho de banda comenzó a hacerse realmente ancho, la popularización del video a través de una conexión de datos se hizo posible; la información dejó de ser sólo texto e imágenes pequeñas o ultra comprimidas y la web se tornó realmente multimedia.
 
-HTML5 introdujo un elemento para insertar y reproducir vídeo en un documento HTML. El elemento **<video>** usa etiquetas de apertura y cierre, además, sólo necesita unos pocos parámetros para lograr su función. La sintaxis es extremadamente sencilla y sólo el atributo src es obligatorio:
+HTML5 introdujo un elemento para insertar y reproducir vídeo en un documento HTML. El elemento **\<video\>** usa etiquetas de apertura y cierre, además, sólo necesita unos pocos parámetros para lograr su función. La sintaxis es extremadamente sencilla y sólo el atributo src es obligatorio:
 
 ```html
      <video src="video.mp4" controls></video>
@@ -83,13 +83,13 @@ Los siguientes codecs de audio son válidos en HTML5, aunque, como ocurre con lo
   
 ### Soporte e formato y codecs por parte de los navegadores
 
-![Tabla de formatos y codecs](img/formatos%20y%20codecs.png)
+![Tabla de formatos y codecs](img/formatosycodecs.png)
 
 Es importante hacer notar que no existe una sola combinación formato/códec de vídeo/códec de audio, a la cual, todos los navegadores modernos le den soporte, por este motivo, es necesario realizar la codificación en varios formatos.
 
 ## El elemento vídeo
 
-El elemento **<video>** ofrece varios atributos para establecer su comportamiento y configuración:
+El elemento **\<video\>** ofrece varios atributos para establecer su comportamiento y configuración:
 
 - atributos *width* y *height*: declaran las dimensiones para el elemento o ventana del reproductor. El tamaño del vídeo será automáticamente ajustado para entrar dentro de estos valores, pero no fueron considerados para redimensionar el vídeo, sino para limitar el área ocupada por el mismo.
   
@@ -121,7 +121,7 @@ Junto con *controls* también podemos utilizar:
 
 ## Reproducir audio en HTML5
 
-HTML5 provee un nuevo elemento para reproducir audio en un documento HTML. El elemento, por supuesto, es **<audio>** y comparte casi las mismas características del elemento **<video>**.
+HTML5 provee un nuevo elemento para reproducir audio en un documento HTML. El elemento, por supuesto, es **\<audio\>** y comparte casi las mismas características del elemento **\<video\>**.
 
 ```html
      <audio id="medio" controls>
@@ -177,26 +177,26 @@ HTML5 incorpora una lista de métodos para procesamiento de medios. Los siguient
 # Practica
 ## Ejercicio 1
 
-Lo que tenemos que hacer en este ejercicio es eliminar la imagen del logo de la cabecera de nuestra hoja de estilos e introducirla mediante HTML. Para ello introduciremos un nuevo elemento **<img>** dentro del elemento **<h1>** de nuestro **<header>**.
-El aspecto de la página debe continuar igual que cuando teníamos la imagen dentro del CSS, por lo que tendremos que aplicar los estilos que sean necesarios. En concreto, pondremos el elemento **<h1>** que contendrá el **<img>** con posicionamiento relativo y el elemento **<img>** con posicionamiento absoluto y posición izquierda y superior a 15px.
+Lo que tenemos que hacer en este ejercicio es eliminar la imagen del logo de la cabecera de nuestra hoja de estilos e introducirla mediante HTML. Para ello introduciremos un nuevo elemento **\<img\>** dentro del elemento **\<h1\>** de nuestro **\<header\>**.
+El aspecto de la página debe continuar igual que cuando teníamos la imagen dentro del CSS, por lo que tendremos que aplicar los estilos que sean necesarios. En concreto, pondremos el elemento **\<h1\>** que contendrá el **\<img\>** con posicionamiento relativo y el elemento **\<img\>** con posicionamiento absoluto y posición izquierda y superior a 15px.
 
 ## Ejercicio 2
-En ocasiones, para conseguir un diseño específico no tenemos más remedio que introducir un elemento que no tendrña semántica ni aportará nada a los contenidos, pero que nos ayudará como elemento contenedor para, por ejemplo, poner una imagen de fondo y ubicarla en el lugar que nos interese. En estos casos, utilizaremos siempre elementos **<div>** o **<span>**, dependiendo de si necesitamos un elemento en bloque o en línea.
+En ocasiones, para conseguir un diseño específico no tenemos más remedio que introducir un elemento que no tendrña semántica ni aportará nada a los contenidos, pero que nos ayudará como elemento contenedor para, por ejemplo, poner una imagen de fondo y ubicarla en el lugar que nos interese. En estos casos, utilizaremos siempre elementos **\<div\>** o **\<span\>**, dependiendo de si necesitamos un elemento en bloque o en línea.
 El resultado que queremos obtener en este ejercicio es el siguiente:
 
 ![Imagen de los teléfonos](img/telefonos.png)
 
-La imagen de la chincheta se encuentra en la carpeta recursos. Para colocar esta imagen sobre la cabecera de nuestros móviles, necesitaremos introducir un elemento **<div>** en cada uno de los **<header>** de nuestros elementos **<article>**.
+La imagen de la chincheta se encuentra en la carpeta recursos. Para colocar esta imagen sobre la cabecera de nuestros móviles, necesitaremos introducir un elemento **\<div\>** en cada uno de los **\<header\>** de nuestros elementos **\<article\>**.
 
 ```html
 <div class="chincheta"></div>
 ```
 
-Una vez modificado el *html* tendremos que colocar la chincheta en el lugar adecuado, para lo cual, le pondremos posición absoluta (evidentemente, los elementos **<header>** de los **<article>** tendrán posición relativa).
+Una vez modificado el *html* tendremos que colocar la chincheta en el lugar adecuado, para lo cual, le pondremos posición absoluta (evidentemente, los elementos **\<header\>** de los **\<article\>** tendrán posición relativa).
 Los elementos chincheta tendrán las siguientes propiedades: ancho 35px, alto 49px, posición superior -91px, imagen de fondo chincheta.png. Además, habrá que controlar la superposición con los móviles.
-La chincheta del primer **<article>** tendrá la posición izquierda en 199px, la del segundo en 120px y la del tercero en 30px.
-Para evitar que las chinchetas se solapen con la barra de navegación, le pondremos un margen superior a los **<article>** de 30px.
-Una vez hemos colocado las chinchetas, para que parezca que los móviles están colgando de ellas, rotaremos un poco los **<article>** primero y tercero. Para ello utilizaremos una transformación de rotación de -2deg en el primero y 2deg en el tercero.
+La chincheta del primer **\<article\>** tendrá la posición izquierda en 199px, la del segundo en 120px y la del tercero en 30px.
+Para evitar que las chinchetas se solapen con la barra de navegación, le pondremos un margen superior a los **\<article\>** de 30px.
+Una vez hemos colocado las chinchetas, para que parezca que los móviles están colgando de ellas, rotaremos un poco los **\<article\>** primero y tercero. Para ello utilizaremos una transformación de rotación de -2deg en el primero y 2deg en el tercero.
 
 ## Ejercicio 3
 
@@ -240,11 +240,11 @@ En este último ejercicio vamos a crear una nueva sección dentro de nuestra pá
 Esta sección la crearemos dentro de un documento llamado *videos.html*. Este documento será exactamente igual que el documento index.html, salvo dos excepciones:
 
 - En el menú de navegación, el enlace de contenidos apuntará a la página *index.html*.
-- Los contenidos del documento (elemento **<main>**) serán diferentes a los del documento *index.html* y se explicarán a continuación.
+- Los contenidos del documento (elemento **\<main\>**) serán diferentes a los del documento *index.html* y se explicarán a continuación.
 
 ![Imagen página videos](img/videos.png)
 
-El código de nuestra sección **<main>**, será el siguiente:
+El código de nuestra sección **\<main\>**, será el siguiente:
 
 ```html
 <main>
