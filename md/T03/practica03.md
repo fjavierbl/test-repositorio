@@ -1,6 +1,6 @@
 ---
 # Informació general del document
-title: Práctica T03 - Multimedia, Transformacione y Transiciones
+title: Práctica T03 - Multimedia, Transformaciones y Transiciones
 author: Javier Beteta
 date: 2022-01
 subject: HTML5 CSS3 Multimedia, Transformaciones y transiciones
@@ -94,12 +94,14 @@ El elemento **\<video\>** ofrece varios atributos para establecer su comportamie
 - atributos *width* y *height*: declaran las dimensiones para el elemento o ventana del reproductor. El tamaño del vídeo será automáticamente ajustado para entrar dentro de estos valores, pero no fueron considerados para redimensionar el vídeo, sino para limitar el área ocupada por el mismo.
   
 - El atributo *src* indca la fuente del vídeo.
+
      ```html
           <video id="medio" width="720" height="400" controls>
                <source src="video.mp4">
                <source src="video.ogg">
           </video>
      ```
+
 - *controls*: este atributo muestra controles de vídeo provistos por el navegador.
 
 Junto con *controls* también podemos utilizar:
@@ -108,9 +110,9 @@ Junto con *controls* también podemos utilizar:
 - *loop*: reproduce en bucle
 - *poster*: imaegen que se muestra mientras se carga el vídeo
 - *preload*: Puede tomar tres valores:
- - *none*: vídeo no debe ser cacheado.
- - *metadata*: recomienda al navegador que trate e capturar información acerca del vídeo (dimensiones, duración etc..)
- - *auto*: descargar el archivo tan pronto como sea posible
+   - *none*: vídeo no debe ser cacheado.
+   - *metadata*: recomienda al navegador que trate e capturar información acerca del vídeo (dimensiones, duración etc..)
+   - *auto*: descargar el archivo tan pronto como sea posible
   
   ```html
      <video id="reproductor" width="720" height="400" preload controls loop poster="poster.jpg">
@@ -181,7 +183,7 @@ Lo que tenemos que hacer en este ejercicio es eliminar la imagen del logo de la 
 El aspecto de la página debe continuar igual que cuando teníamos la imagen dentro del CSS, por lo que tendremos que aplicar los estilos que sean necesarios. En concreto, pondremos el elemento **\<h1\>** que contendrá el **\<img\>** con posicionamiento relativo y el elemento **\<img\>** con posicionamiento absoluto y posición izquierda y superior a 15px.
 
 ## Ejercicio 2
-En ocasiones, para conseguir un diseño específico no tenemos más remedio que introducir un elemento que no tendrña semántica ni aportará nada a los contenidos, pero que nos ayudará como elemento contenedor para, por ejemplo, poner una imagen de fondo y ubicarla en el lugar que nos interese. En estos casos, utilizaremos siempre elementos **\<div\>** o **\<span\>**, dependiendo de si necesitamos un elemento en bloque o en línea.
+En ocasiones, para conseguir un diseño específico no tenemos más remedio que introducir un elemento que no tendrá semántica ni aportará nada a los contenidos, pero que nos ayudará como elemento contenedor para, por ejemplo, poner una imagen de fondo y ubicarla en el lugar que nos interese. En estos casos, utilizaremos siempre elementos **\<div\>** o **\<span\>**, dependiendo de si necesitamos un elemento en bloque o en línea.
 El resultado que queremos obtener en este ejercicio es el siguiente:
 
 ![Imagen de los teléfonos](img/telefonos.png)
