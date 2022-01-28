@@ -147,15 +147,16 @@ Ejemplo:
           registro=document.getElementById("registro");
           password1=document.getElementById("password1");
           password2=document.getElementById("password2");
-     /* El evento input se producir  cada vez que se pulse una tecla */
+          /* El evento input se producirá cada vez que se pulse una tecla */
           password1.addEventListener("input", validacion, false);
           password2.addEventListener("input", validacion, false);
      }
+
      function validacion() {
           if(password1.value!==password2.value)
-               password2.setCustomValidity('Las passwords deben coincidir');
+               password2.setCustomValidity("Las passwords deben coincidir");
           else
-               password2.setCustomValidity('');
+               password2.setCustomValidity("");
           }
      window.addEventListener("load", iniciar, false);
 ```
@@ -168,10 +169,11 @@ Cada vez que el usuario envía el formulario, se dispara un evento llamado inval
           registro=document.getElementById("registro");
           registro.addEventListener("invalid", accionInvalid, true);
      }
+
      function accionInvalid(evento) {
-          /* obtenemos el elemento que no ha pasado la validaci n */
+          /* obtenemos el elemento que no ha pasado la validación */
           var elemento = evento.target;
-          elemento.style.background='yellow';
+          elemento.style.background="yellow";
      }
      window.addEventListener("load", iniciar, false);
 ```
@@ -214,7 +216,7 @@ Podemos aprovechar estos atributos para realizar la validación del formulario a
 
 ```javascript
 function validarEntrada(evento) {
-     /* obtenemos el elemento sobre el que se est  produciendo la entrada */
+     /* obtenemos el elemento sobre el que se está produciendo la entrada */
      var elemento = evento.target;
      if (elemento.validity.valid)
           elemento.style.background = "transparent";
@@ -223,7 +225,7 @@ function validarEntrada(evento) {
 }
 function iniciar() {
      registro=document.getElementById("registro");
-     /* el evento se producir  cuando se pulsa una tecla sobre cualquier campo del formulario */
+     /* el evento se producirá cuando se pulsa una tecla sobre cualquier campo del formulario */
      registro.addEventListener("input", validarEntrada, false);
 }
 window.addEventListener("load", iniciar, false);
@@ -245,18 +247,22 @@ Podemos aplicar estilos a elementos de formularios requeridos con la pseudo-clas
 Muchas veces, no nos interesará aplicar el mismo estilo a todos los tipos de input, por ejemplo, los botones suelen tener estilos diferentes. Para solucionar esto, podemos utilizar la pseudo-clase :not.
 
 ```css
-     input:not([type=range]):not([type=submit]):not([type=button]):not([type=checkbox])
-     { background: transparent no-repeat top right;}
+     input:not([type=range]):not([type=submit]):not([type=button]):not([type=checkbox]){ background: transparent no-repeat top right;}
      input:not([type=range]):not([type=submit]):not([type=button]):not([type=checkbox]):required { background-image: url('../imgs/required.png');}
 ```
 
 Con estas reglas, evitamos que se inserte la imagen del asterisco, en aquellos tipos de entrada que no nos interesa.
 
 ```css
-input:not([type=range]):not([type=submit]):not([type=button]):not([type=checkbox]):invalid { background-image: url('../imgs/invalid.png');}
-
+input:not([type=range]):not([type=submit]):not([type=button]):not([type=checkbox]):invalid 
+     { 
+          background-image: url('../imgs/invalid.png');
+     }
 input:not([type=range]):not([type=submit]):not([type=button]):not([type=checkbox]):valid
-{background-image: url('../imgs/valid.png');}
+     {
+          background-image: url('../imgs/valid.png');
+     }
+
 ```
 ![Campos validos e invalidos](img/validos-invalidos.png)
 
@@ -472,7 +478,7 @@ Además de todo esto, el formulario tiene que validarse de la siguiente forma:
 Estas validaciones las realizaremos en un fichero JavaScript llamado *contacto.js*.
 Todos los ficheros (imágenes, fuentes, etc.) necesarios para la realización del ejercicio, los pod´wis encontrar en el fichero de recursos.
 
-No olvid´wis pasar el validador tanto a los *html* como a los *css*
+No olvidéis pasar el validador tanto a los *html* como a los *css*
   
 
 
