@@ -108,7 +108,7 @@ Este formulario *registro.hml* lo podéis encontrar en el material de la prácti
 
 ![Formulario](img/formulario.png)
 
-Para ello utilizaremos los nuevos tipos de **<input>** ofrecidos por HTML5.
+Para ello utilizaremos los nuevos tipos de **\<input\>** ofrecidos por HTML5.
 - search
 - email
 - url
@@ -180,7 +180,7 @@ Este código tendrá un problema, y es que cuando corrijamos el error de validac
 
 
 #### Controlar la validación
-Para tener control absoluto sobre el envío del formulario y el momento de validación, podemos sustituir el **<input type="submit">** por un **<button>**.
+Para tener control absoluto sobre el envío del formulario y el momento de validación, podemos sustituir el **\<input type="submit"\>** por un **\<button\>**.
 Cuando se pulse este botón, el formulario se enviará, pero sólo si todos sus elementos son válidos. Para ello, debemos agregar un manejador para el evento click del botón. Usando el método checkValidity(), que nos devolverá true si no hay ningún campo que no pase la validación, solicitamos al navegador que realice el proceso de validación, y sólo enviamos el formulario, usando el tradicional método submit(), cuando ya no hay más condiciones inválidas.
 
 ```javascript
@@ -364,7 +364,7 @@ Cuando el foco está en un input que cumple la validación se marcará-  con la 
      - Color de fuente: #fff
      - Sombra del texto: ninguna.
 - El título del formulario tendrá dos imágenes de fondo, una a la izquierda (*bg-formtitle-left.png*) y otra a la derecha (*bg-formtitle-right.png*). Estas imágenes estarán redimensionadas a 100px de ancho y alto automático.
-- Los **<label>** y el botón del formulario tendrán la fuente *LeagueGothic*.
+- Los **\<label\>** y el botón del formulario tendrán la fuente *LeagueGothic*.
 - El título del formulario usará la fuente AcknowledgementMedium.
 - Ambas fuentes deben ser incrustadas a la hoja de estilos.
 El formulario resultante se verá como se muestra en la imagen:
@@ -446,8 +446,8 @@ Para que el formulario tome el aspecto que se muestra en la imagen, tendremos qu
         1. Que la validación del campo sea correcta, con lo que, además de la imagen indicada anteriormente, tendrá también la imagen valid.png como fondo, tampoco se repetirá y estará colocada a 390px del borde izquierdo.
         2. Que la validación del campo no sea correcta, con lo que, además de la imagen indicada anteriormente, tendrá también la imagen invalid.png como fondo, tampoco se repetirá y estará colocada a 390px del borde izquierdo.
    - Si nos fijamos en la imagen, tanto el campo nombre como el campo correo tienen un asterisco ‘*’ a la derecha que indica que ambos campos son requeridos. Para hacer esto haremos lo siguiente:
-        1. En el documento html añaadiremos un **<label>** vacío a continuación del cada **<input>**.
-        2. En la hoja de estilos indicaremos una regla para seleccionar los input que sean requeridos y tengan un hermano adyacente de tipo **<label>**. En esta regla indicaremos que se añada después del elemento (::after) el contenido ‘ *’ (content: ‘ *’;).
+        1. En el documento html añaadiremos un **\<label\>** vacío a continuación del cada **\<input\>**.
+        2. En la hoja de estilos indicaremos una regla para seleccionar los input que sean requeridos y tengan un hermano adyacente de tipo **\<label\>**. En esta regla indicaremos que se añada después del elemento (::after) el contenido ‘ *’ (content: ‘ *’;).
 - Campo mensaje:
    - Fuente arial.
    - Tamaño de fuente 1em.
@@ -466,7 +466,7 @@ Para que el formulario tome el aspecto que se muestra en la imagen, tendremos qu
    - Al poner el ratón sobre el botón se pondrá el mismo gradiente de fondo, pero al contrario, es decir, en lugar de arriba abajo, de abajo arriba.
 
 Además de todo esto, el formulario tiene que validarse de la siguiente forma:
-- El campo nombre, tiene que ser uno de los siguientes: alex, juan, ana o pedro. Para ayudar a la entrada de usuario crearemos un **<datalist>** que contendrá estos nombres y asociaremos al campo. A medida que el usuario vaya pulsando teclas estando en el campo, se validará si el usuario que hay en el campo es uno de los válidos. Si al pulsar enviar el usuario no es válido se mostrará el mensaje de error "El usuario introducido no existe".
+- El campo nombre, tiene que ser uno de los siguientes: alex, juan, ana o pedro. Para ayudar a la entrada de usuario crearemos un **\<datalist\>** que contendrá estos nombres y asociaremos al campo. A medida que el usuario vaya pulsando teclas estando en el campo, se validará si el usuario que hay en el campo es uno de los válidos. Si al pulsar enviar el usuario no es válido se mostrará el mensaje de error "El usuario introducido no existe".
 - El campo correo debe contener una dirección de correo de un dominio español, es decir, debe acabar en ".es". A medida que el usuario vaya pulsando teclas estando en el campo, se validará si el correo que hay en el campo es válido. Si al pulsar enviar el correo no es válido se mostrará el mensaje de error "Debes introducir una dirección de correo española (acabada en .es)".
   
 Estas validaciones las realizaremos en un fichero JavaScript llamado *contacto.js*.

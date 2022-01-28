@@ -77,9 +77,9 @@ body
 	color:silver;
 	text-align:center;
 	
-	background: -webkit-linear-gradient(top, rgb(213, 186, 50), rgb(255, 218, 62));
+	/* background: -webkit-linear-gradient(top, rgb(213, 186, 50), rgb(255, 218, 62));
 	background: -moz-linear-gradient(top, rgb(213, 186, 50), rgb(255, 218, 62));
-	background: -o-linear-gradient(top, rgb(213, 186, 50), rgb(255, 218, 62));
+	background: -o-linear-gradient(top, rgb(213, 186, 50), rgb(255, 218, 62)); */
 	background: linear-gradient(to bottom, rgb(213, 186, 50), rgb(255, 218, 62));
 }
 
