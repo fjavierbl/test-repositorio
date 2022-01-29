@@ -1,0 +1,159 @@
+/* estilos para el formulario de contacto */
+
+@import url(http://fonts.googleapis.com/css?family=Aguafina+Script);
+
+main {
+	background:url(../imgs/fondoForm.jpg);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	text-align:center;
+}
+
+#contenedorFormulario 
+{
+	position:relative;
+	display: inline-block;
+	margin:50px;
+	width:600px;
+	padding:20px 50px;
+	background: rgba(200, 200, 200, 0.7);
+	text-align:left;
+	
+	-webkit-box-shadow:3px 0px 8px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow:3px 0px 8px rgba(0, 0, 0, 0.4);
+	-o-box-shadow:3px 0px 8px rgba(0, 0, 0, 0.4);
+	box-shadow:3px 0px 8px rgba(0, 0, 0, 0.4);
+}
+
+#contenedorFormulario h1
+{
+	position: absolute;
+	top:-16px;
+	left:490px;
+	background: rgba(255, 255, 255, 0.7);
+	font-family: 'Aguafina Script', cursive;
+	letter-spacing:5px;
+	color:#333;
+	text-shadow:0px 0px 2px #777;
+	padding:0px 10px;
+}
+
+input:not([type=submit]), textarea
+{
+	display: inline-block;
+	border:1px solid #e5e5e5;
+	
+	-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+	-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+	-o-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+	box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+	
+	color:black;
+	font-weight: bold;
+	padding:1px 4px 1px 45px;
+	margin-bottom: 10px;
+
+	transition:0.4s all ease-in;
+	-webkit-transition:0.4s all ease-in;
+	-moz-transition:0.4s all ease-in;
+	-o-transition:0.4s all ease-in;
+}
+
+input:not([type=submit]) 
+{
+	height:32px;
+	width:330px;
+}
+
+input:not([type=submit]):focus 
+{
+	width:370px;
+	
+	-webkit-box-shadow: 0px 0px 12px rgb(255, 255, 255);
+	-moz-box-shadow: 0px 0px 12px rgb(255, 255, 255);
+	-o-box-shadow: 0px 0px 12px rgb(255, 255, 255);
+	box-shadow: 0px 0px 12px rgb(255, 255, 255);
+}
+
+#nombre
+{
+	background:url(../imgs/icon-nombre.png) no-repeat 10px;
+}
+
+#nombre:focus:valid
+{
+	background:url(../imgs/icon-nombre.png) no-repeat 10px, url(../imgs/valid.png) no-repeat 390px;
+}
+
+#nombre:focus:invalid
+{
+	background:url(../imgs/icon-nombre.png) no-repeat 10px, url(../imgs/invalid.png) no-repeat 390px;
+}
+
+#correo
+{
+	background:url(../imgs/icon-correo.png) no-repeat 10px;
+}
+
+#correo:focus:valid
+{
+	background:url(../imgs/icon-correo.png) no-repeat 10px, url(../imgs/valid.png) no-repeat 390px;
+}
+
+#correo:focus:invalid
+{
+	background:url(../imgs/icon-correo.png) no-repeat 10px, url(../imgs/invalid.png) no-repeat 390px;
+}
+
+input:required + label::after 
+{ 
+	content: ' *'; 
+}
+
+textarea 
+{
+	font-family: arial;
+	font-size: 1em;
+	
+	width:90%;
+	height:150px;
+
+	background:url(../imgs/icon-mensaje.png) no-repeat 10px;
+}
+
+textarea:focus 
+{
+	-webkit-box-shadow: 0px 0px 12px rgb(255, 255, 255);
+	-moz-box-shadow: 0px 0px 12px rgb(255, 255, 255);
+	-o-box-shadow: 0px 0px 12px rgb(255, 255, 255);
+	box-shadow: 0px 0px 12px rgb(255, 255, 255);
+}
+
+input[type="submit"] 
+{
+	margin: 10px 0px;
+    padding: 10px;
+    border: 1px solid #434343;
+	
+    background-image: -webkit-linear-gradient(top,#5e5e5e,#2a2a2a);
+    background-image: -moz-linear-gradient(top,#5e5e5e,#2a2a2a);
+    background-image: -o-linear-gradient(top,#5e5e5e,#2a2a2a);
+    background-image: linear-gradient(to bottom,#5e5e5e,#2a2a2a);
+	
+    -moz-box-shadow: 0 1px 1px #353535 inset;
+    -webkit-box-shadow: 0 1px 1px #353535 inset;
+    -o-box-shadow: 0 1px 1px #353535 inset; 
+    box-shadow: 0 1px 1px #353535 inset;
+	
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover 
+{
+    background-image: -webkit-linear-gradient(bottom,#5e5e5e,#2a2a2a);
+    background-image: -moz-linear-gradient(bottom,#5e5e5e,#2a2a2a);
+    background-image: -o-linear-gradient(bottom,#5e5e5e,#2a2a2a);
+    background-image: linear-gradient(to top,#5e5e5e,#2a2a2a);
+}
