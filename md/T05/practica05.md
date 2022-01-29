@@ -192,6 +192,449 @@ En todos los casos, el primer atributo puede ser una referencia a una imagen en 
 ```
 El ejemplo anterior lo único que hace es cargar la imagen y dibujarla en el lienzo. Debido a que el lienzo sólo puede dibujar imágenes que ya están completamente cargadas, necesitamos controlar esta situación escuchando al evento load de la imagen. Agregamos una escucha para este evento y declaramos una función anónima para responder al mismo. El método drawImage dentro de esta función dibujará la imagen cuando esté completamente cargada.
 
+## Organizando el código del videojuego
+
+Para comenzar con nuestros videojuegos, vamos a organizar un poco nuestro código, de forma que la operación de dibujo la sacaremos a una función que llamaremos paint y que recibirá el lienzo como parámetro.
+
+```javascript
+     var lienzo=null, canvas=null;
+     function iniciar(){
+          canvas=document.getElementById('lienzo');
+          lienzo=canvas.getContext('2d');
+          paint(lienzo);
+     }
+     function paint(lienzo){
+          lienzo.fillStyle='#0f0';
+          lienzo.fillRect(50,50,100,60);
+     }
+     window.addEventListener("load", iniciar, false);
+```
+
+### Animar el canvas
+En la primera parte del tema, hemos visto cómo dibujar en nuestro lienzo. Eso está bien, pero cuando desarrollamos un juego, se trata de interactuar con los objetos, no solo de dibujarlos. Por tanto, necesitamos darle movimiento a nuestros objetos gráficos.
+Para mostrar la técnica haremos que nuestro rectángulo se vaya desplazando horizontalmente a lo largo del canvas. Primero, declararemos dos nuevas variables globales (x e y) y las inicializaremos.
+
+```javascript
+     var x=50,y=50;
+```
+
+A continuación, modificaremos nuestra función paint para que limpie la pantalla antes de volver a dibujar en ella (esto lo haremos dibujando un rectángulo del tamaño completo del lienzo). Posteriormente, dibujaremos de nuevo nuestro rectángulo, pero con las coordenadas actualizadas (haremos el rectángulo más pequeño para que el efecto sea más claro). Para mejorar un poco el aspecto de nuestro videojuego, dibujaremos el rectángulo relleno con un gradiente.
+
+```javascript
+     function paint(lienzo){
+          var gradiente=lienzo.createLinearGradient(0,0,0,canvas.height);
+          gradiente.addColorStop(0.5, '#0000FF');
+          gradiente.addColorStop(1, '#000000');
+          lienzo.fillStyle=gradiente;
+          lienzo.fillRect(0,0,canvas.width,canvas.height);
+          lienzo.fillStyle='#0f0';
+          lienzo.fillRect(x,y,10,10);   
+          }
+```
+
+Como se puede ver, estamos dibujando el rectángulo de fondo de color negro.
+En este momento, nuestra función iniciar llama sólo una vez a la función paint, por lo tanto, se ejecutará una sola vez, es decir, todo se quedará estático. Si queremos que se comporte como una animación, tenemos que hacer que se llame a la función una y otra vez cada determinado tiempo. Para esto, crearemos una funcián *run()*, y sustituiremos la llamada a la función *paint* que hacemos en *iniciar* por una llamada a la función *run*.
+
+```javascript
+     function run(){
+          setTimeout(run, 17);
+          act();
+          paint(lienzo);
+     }
+
+     function act(){
+          if(x>canvas.width)
+               x=0;
+          else
+               x+=2;
+          }
+```
+
+En la primera línea, llamamos al método *setTimeout*. Este método, que recibe una función por parámetro, le pedirá al navegador que ejecute dicha función cuando transcurra el número de milisegundos que le indicamos como segundo parámetro.
+Posteriormente, llamamos a una nueva función *act()*. Hemos visto antes que *paint* es la función que se encarga de dibujar todo el escenario en nuestro lienzo. La función *act* la usaremos para realizar todas las acciones que se producen en nuestro juego; en este caso, moveremos nuestro rectángulo sumándole 2 píxeles a nuestra variable *x* hasta que llegue al borde derecho del canvas momento en el que volverá a valer 0.
+
+Qué tenemos por ahora:
+```javascript
+     var lienzo=null, canvas=null;
+     var x=50,y=50;
+     function iniciar(){
+          canvas=document.getElementById('lienzo');
+          lienzo=canvas.getContext('2d');
+          run();
+     }
+
+     function run(){
+          setTimeout(run, 17);
+          act();
+          paint(lienzo);
+     }
+
+     function act(){if(x>canvas.width) x=0; else x+=2;}
+
+     function paint(lienzo){
+          var gradiente=lienzo.createLinearGradient(0,0,0,canvas.height);
+          gradiente.addColorStop(0.5, '#0000FF');
+          gradiente.addColorStop(1, '#000000');
+          lienzo.fillStyle=gradiente;
+          lienzo.fillRect(0,0,canvas.width,canvas.height);
+          lienzo.fillStyle='#0f0';
+          lienzo.fillRect(x,y,10,10);
+     }
+
+     window.addEventListener("load", iniciar, false);
+```
+
+### Mejorar el rendimiento de la animación
+
+En el pasado, para crear temporizadores en general, se utilizaba la función *setTimeout*. Pero esta función no estaba pensada para ser múltiples llamadas por segundo y consumen muchos recursos.
+Para evitar este problema de rendimiento las compañías desarrolladoras de navegadores web han ideado una mejor solución para esta tarea: la función **requestAnimationFrame**. Esta función, que recibe otra función como parámetro, le pedirña al navegador que ejecute dicha función la próxima vez que pueda realizar un cuadro de animación (la frecuencia en que se repetirá la ejecución de la función dependerá del rendimiento del equipo, en máquinas actuales la frecuencia de actualización del navegador rondará los 60 cuadros por segundo). Así, mejoraremos la capacidad de manejar animaciones, consumiendo menos recursos, e incluso mandando a dormir el ciclo cuando la aplicación deja de tener el foco.
+Para usar **resquestAnimationFrame**, la llamaremos en la primera línea de una función, enviando como primer parámetro esa misma función, de forma que la vuelva a llamar después del tiempo de intervalo. Con esto, nuestra función run quedará de la siguiente forma:
+
+```javascript
+     function run() {
+          requestAnimationFrame(run);
+          act();
+          paint(lienzo);
+     }
+```
+
+**requestAnimationFrame(run)** equivaldría a llamar a *setTimeout(run,17)*, pero de forma optimizada.
+
+### Regular tiempo entre dispositivos
+Para regular el tiempo entre dispositivos se pueden utilizar diversos métodos, cada uno de los cuáles con una serie de ventajas y una serie de inconvenientes.
+Una posibilidad es hacer de forma asíncrona las funciones paint y act. Esto quiere decir, que cada uno se actualice a su propio ritmo, optimizando así los tiempos para ambas acciones. La desventaja, es que, en algunas ocasiones, necesitaremos que algunos valores interactúen entre las funciones act y paint, lo que podría volverse una tarea un poco más compleja con este método, pero para el videojuego que vamos a crear esto no será un problema.
+La forma más sencilla de realizar un método asíncrono es usar un requestAnimationFrame para la función paint y un setTimeout para la función act. Para eso, se crean dos funciones distintas que se llaman a sí mismas continuamente:
+```javascript
+     function run(){
+          setTimeout(run,50);
+          act();    
+     }
+     function repaint(){
+          requestAnimationFrame(repaint)
+          paint(lienzo);
+     }
+```
+Lo único que nos quedará por hacer será llamar a ambas funciones (run y repaint) al final de la función iniciar, y el juego funcionará como de costumbre.
+
+### Usando el teclado
+Nuestro rectángulo ya se mueve por el lienzo, pero para verdaderamente interactuar con él, necesitamos indicarle a dónde queremos que vaya. Para eso, necesitamos primero una variable dónde guardar la tecla presionada:
+
+```javascript
+var lastPress=null;
+```
+
+También necesitaremos crear un manejador de evento para el teclado que se encargue de almacenar la tecla presionada. El evento que nos interesa en este caso es keydown:
+```javascript
+     document.addEventListener('keydown', 
+          function(evt){lastPress=evt.keyCode;}, false);
+```
+El manejador lo pondremos al final de nuestro código.
+
+A partir de ahora, podremos tomar decisiones en el juego sabiendo la última tecla presionada. Cada tecla tiene un valor numérico, el cual tendremos que comparar para realizar la acción deseada dependiendo la tecla presionada. Como ejemplo, vamos a mostrar por pantalla cuál ha sido la última tecla presionada. Esto lo haremos en nuestra función *paint*:
+```javascript
+lienzo.fillText('Last Press: '+lastPress,10,30);
+```
+En nuestro juego, usaremos las teclas izquierda, arriba, derecha y abajo, cuyos valores numéricos son 37, 38, 39 y 40 respectivamente. Para acceder a ellas más fácilmente, crearemos las siguientes constantes:
+```javascript
+     const KEY_LEFT=37;
+     const KEY_UP=38;
+     const KEY_RIGHT=39;
+     const KEY_DOWN=40;
+```
+Vayamos ahora al movimiento del rectángulo. Primero necesitaremos definir cuatro constantes para especificar la dirección del rectángulo:
+```javascript
+     const ARRIBA=0;
+     const DERECHA=1;
+     const ABAJO=2;
+     const IZQUIERDA=3;
+```
+Después, necesitaremos una nueva variable que almacene la dirección de nuestro rectángulo: 
+```javascript
+     var dir=DERECHA;
+```
+
+El siguiente paso será modificar la dirección que tomará nuestro rectángulo dependiendo de la última tecla presionada (dentro de la función *act*):
+```javascript
+     if(lastPress==KEY_UP) dir=ARRIBA;
+     if(lastPress==KEY_RIGHT)dir=DERECHA;
+     if(lastPress==KEY_DOWN) dir=ABAJO;
+     if(lastPress==KEY_LEFT) dir=IZQUIERDA;
+     //A continuación, moveremos nuestro rectángulo dependiendo de la dirección que se haya indicado:
+     if(dir==DERECHA) x+=10;
+     if(dir==IZQUIERDA) x-=10; 
+     if(dir==ARRIBA) y-=10;
+     if(dir==ABAJO) y+=10;
+    //Finalmente, verificaremos si el rectángulo ha salido del canvas, en cuyo caso, haremos que aparezca por el otro lado:
+     if(x>=canvas.width) x=0;
+     if(y>=canvas.height)y=0;
+     if(x<0) x=canvas.width-10;
+     if(y<0) y=canvas.height-10;
+     //Como vemos, se comprueban todos los bordes del canvas.
+```
+
+### Pausar el juego
+Vamos a implementar esta funcionalidad cuando se pulsa la tecla *p*. Comenzamos por crear una variabe que controle si el juego está en pausa.
+```javascript
+     var pause=true;
+```
+Ahora, encerraremos todo el contenido de nuestra función *act* en un condicional *if(!pause)*, es decir, si el juego no está en pausa.
+
+```javascript
+     if(lastPress==KEY_P) {
+          pause=!pause;
+          lastPress=null;     
+     }
+```
+
+tendremos que crear la constante para la tecla p:
+
+```javascript
+     const KEY_P=80;
+```
+
+Por último, cuando el juego está en pausa, dibujaremos en nuestra función paint el texto "PAUSE" centrado:
+```javascript
+     if(pause) {
+          lienzo.textAlign='center';
+          lienzo.fillText('PAUSE',150,75);
+          lienzo.textAlign='left';
+     }
+```
+
+Ahora, cada vez que presionemos la tecla p, el juego entrará o saldrá de la pausa.
+
+### Uso de programación orientada a objetos
+En programación se llama "objeto" a un conjunto de propiedades y métodos que definen su comportamiento. Al conjunto de características definidas en base al cual se crea un objeto, se le llama "clase".
+Los lenguajes de programación permiten crear clases personalizadas, además de aquellas que vienen predefinidas.
+JavaScript, a diferencia de otros lenguajes, no tiene clases como tal. Pero se pueden definir funciones que actúan como clases.
+Para comprender mejor lo aquí explicado, crearemos una clase para objetos de tipo rectángulo.
+
+```javascript
+     function Rectangle(x,y,width,height,color){
+          this.x=x;
+          this.y=y;
+          this.width=width;
+          this.height=height;
+          this.color=color;
+     }
+```
+
+Mediante la función anterior, podemos crear objetos de tipo rectángulo, como se muestra en el ejemplo siguiente:
+
+```javascript
+     var rect1=new Rectangle(50,50,100,60,"#f00");
+```
+
+Si por error se creara un objeto sin especificar todas sus propiedades, las propiedades faltantes obtendrían un valor nulo o indefinido, lo cual podría causar problemas posteriormente en nuestro código. Para prevenir esto, es recomendable que se asigne un valor predefinido en caso que no se especifique alguno de los parámetros: 
+```javascript
+     this.x=(x==null)?0:x;
+```
+
+Es importante asignar *this.width* y no *width* directamente, pues de esta forma, se obtiene ya su valor después de comprobarse si era nulo o no. De lo contrario, podríamos asignar un valor nulo por error a la altura, en caso que el ancho enviado haya sido nulo también.
+
+Otra propiedad importante de los objetos, es que tienen métodos propios. Por ejemplo, añadiremos un método a la clase Rectángulo que nos permitirá saber cuándo dicho rectángulo está en intersección con otro. El método se llamará intersects y lo definiremos así:
+
+```javascript
+     this.intersects = 
+          function(rect){
+               if(rect!=null) {
+                    return (this.x<rect.x+rect.width &&
+                    this.x+this.width>rect.x &&
+                    this.y<rect.y+rect.height &&
+                    this.y+this.height>rect.y);
+          }
+          return false; 
+     }
+```
+Este método se encontrará dentro de la función Rectangle creada anteriormente, y para llamarlo desde fuera de esta, haremos lo siguiente:
+```javascript
+     var colision = rect1.intersects(rect2);
+```
+
+Esta función devulve *true* si los dos rectángulos se tocan, sino, devuelve *false*.
+
+Otro método útil:
+```javascript
+     this.fill=
+          function(lienzo) { 
+                    if(lienzo!=null) { 
+                         lienzo.fillStyle=this.color; 
+                         lienzo.fillRect(this.x,this.y,this.width,this.height); 
+                         } 
+          }
+```
+
+Mediante esta función, sólo debemos indicarle el lienzo donde se dibujará el rectángulo, y este se dibujará de forma automática.
+
+### Uso de prototipo
+
+Como hemos visto, JavaScript, a diferencia de otros lenguajes, no tiene clases como tales, pero se pueden usar funciones que trabajen de forma similar a las clases, agregando en su interior las variables y funciones necesarias para que los objetos creados a partir de estas se comporten de la forma deseada. Sin embargo, el método visto de incluir las funciones en el interior de la clase (que es la forma estándar en que funcionan la mayoría de los lenguajes), no es el más óptimo en JavaScript, pues cada nuevo objeto crea una copia completa de todo su contenido en la memoria RAM, incluyendo las funciones, que en esencia repiten la misma información sin necesidad, y pueden saturar la memoria en caso de trabajar con miles de objetos, como suele ocurrir en los videojuegos.
+Para hacer esto correctamente en JavaScript, utilizaremos *prototipos* en lugar de clases, de esta forma, no se creará una copia de la información en la memoria RAM para cada uno de los objetos creados, permitiendo el uso de múltiples objetos con un impacto menor en la misma.
+
+```javascript
+     function Rectangle(x,y,width,height,color) {
+          this.x=(x==null)?0:x;
+          this.y=(y==null)?0:y;
+          this.width=(width==null)?0:width;
+          this.height=(height==null)?this.width:height;
+          this.color = (color==null)?"#000":color;
+     }
+
+     Rectangle.prototype.intersects=function(rect) {
+          if(rect!=null){
+               return (this.x<rect.x+rect.width&&
+               this.x+this.width>rect.x&&
+               this.y<rect.y+rect.height&&
+               this.y+this.height>rect.y);
+               }
+     }
+
+Rectangle.prototype.fill=function(lienzo) {
+     if(lienzo!=null)
+          {
+          lienzo.fillStyle=this.color;
+          lienzo.fillRect(this.x,this.y,this.width,this.height);
+          }
+     }
+```
+
+Usar objetos en los videojuegos facilitará muchas de las tareas que tendremos que llevar a cabo.
+
+### Interactuando con otros objetos
+Por ejemplo, dos elementos que colisionan o un personaje que le dispara a otro. Para saber si dos elementos colisionan, es decir, hay una intersección entre ellos, no sólo nos basta con saber su posición XY, tambi´dn necesitamos conocer el alto y ancho de los elementos. Para este propósito, utilizaremos la clase *Rectangle* creada en el punto anterior.
+
+En primer lugar, eliminaremos las variables x e y que declaramos al principio, y en su lugar, crearemos una variable que llamaremos player de tipo *Rectangle*:
+
+```javascript
+     var player=new Rectangle(40,40,10,10,”#0f0”);
+```
+
+Después, cambiaríamos la forma en que se dibuja el rectángulo:
+
+```javascript
+     player.fill(lienzo);
+```
+
+Por último, sustituiremos todos los lugares donde usábamos las variables x e y, por el acceso correcto a través del objeto player que hemos creado. Por ejemplo, donde hacíamos *x+=10*; haremos *player.x+=10;*.
+
+Ahora, necesitaremos un nuevo elemento con el cual interactuar. En este caso, vamos a colocar en un punto aleatorio de la pantalla un nuevo rectángulo que hará las veces de comida del rectángulo inicial, de forma que, al pasar con el rectángulo inicial sobre el rectángulo de comida, la puntuación del juego se incremente y la comida se mueva a otro lugar.
+
+Para implementar esta nueva funcionalidad, lo primero que haremos será crear una nueva variable de tipo *Rectangle* llamada *food*:
+
+```javascript
+     var food=new Rectangle(80,80,10,10,'#f00');
+```
+
+En la función *paint*, dibujaremos la comida:
+
+```javascript
+     food.fill(lienzo);
+```
+
+food.fill(lienzo);
+Ahora, analizaremos si el objeto player y el objeto food colisionan, en cuyo caso, sumaremos un punto a nuestra puntuación, y cambiaremos la posición de la comida a otro lugar al azar. Para ello, primero tendremos que declarar una variable que nos servirá para almacenar nuestra puntuación, también una función random que nos será útil.
+
+```javascript
+     var score=0;
+     function random(max){
+          return Math.floor(Math.random()*max);
+     }
+```
+En la función *act* comprobamos si colisionan nuestro jugador con la comida. SI es así sumaremos un punto y cambiamos de posición la comida.
+
+```javascript
+     if(player.intersects(food)) {
+          score++;
+          food.x=random(canvas.width/10-1)*10;
+          food.y=random(canvas.height/10-1)*10;
+     }
+```
+
+Por último, dibujaremos nuestra puntuación en pantalla: 
+```javascript
+lienzo.fillText('Score: '+score,10,40);
+```
+Ahora, cada vez que el rectángulo verde toque al rojo, la puntuación subirá.
+
+### Interactuando con elementos iguales
+Ya hemos visto en el punto anterior cómo hacer que un objeto interactúe con otro. El problema sería si quisiéramos, por ejemplo, querer interactuar con 50 elementos. Afortunadamente, hay una forma más sencilla de interactuar con varios elementos de propiedades iguales a través de los arrays.
+Evidentemente, si queremos que el juego finalice cuando el jugador colisione con una pared, necesitaremos una variable que nos lo indique. Inicialmente el juego estará en estado Game Over.
+
+```javascript
+     var gameover=true;
+     var wall=[]; // para contener la pared
+     //añadimos al vector las 4 pareder
+     wall.push(new Rectangle(100,50,10,10,"#999"));
+     wall.push(new Rectangle(100,100,10,10,"#999"));
+     wall.push(new Rectangle(200,50,10,10,"#999"));
+     wall.push(new Rectangle(200,100,10,10,"#999"));
+```
+
+Pâra dibujar los elementos pared:
+```javascript
+     for(var i=0,l=wall.length;i<l;i++) {
+          wall[i].fill(lienzo);
+     }
+```
+
+Del mismo modo, comprobaremos si cada elemento pared colisiona con la comida o con el jugador.
+
+```javascript
+     for(var i=0;i<wall.length;i++) {
+          if(food.intersects(wall[i]))
+               {
+                    food.x=random(canvas.width/10-1)*10;
+                    food.y=random(canvas.height/10-1)*10;
+               }
+          if(player.intersects(wall[i])) {gameover=true;}
+     }
+```
+
+Primero comprobamos que la comida no coincida con una pared, si es así volvemos a colocar su posución. En el segundo *if* comprobamos que el jugado no toque pared. En caso afirmativo la partida se detiene.
+
+Más modificaciones, en la función *act* donde teníamos *if (!pause)* ahora ponemos: *(if (!pause && !gameover)*.
+
+También queremos que vuando el juego esté en estado *Game Over* este estado se pinte en el lienzo. Para ello en el método *paint*
+
+```javascript
+     if(pause || gameover) {
+          lienzo.textAlign='center';
+     if(gameover)
+          lienzo.fillText('GAME OVER',150,75);
+     else
+          lienzo.fillText('PAUSE',150,75);
+          lienzo.textAlign='left';
+}
+```
+
+Para terminar, tenemos que implementar alguna manera de reiniciar el juego para que se pueda volver a jugar. Lo que haremos será reiniciar el juego cuando, estando en estado Game Over, se pulse la tecla *ENTER*. Por lo tanto, tendremos que definir la constante para la tecla correspondiente:
+
+```javascript
+     const KEY_ENTER=13;
+     ...
+     ...
+     // en la función act
+     if (gameover && lastPress==KEY_ENTER){reset();}
+     ...
+     ...
+     function reset(){
+          score=0;
+          dir=DERECHA;
+          player.x=40;
+          player.y=40;
+          food.x=random(canvas.width/10-1)*10;
+          food.y=random(canvas.height/10-1)*10;
+     lastPress=null;
+     gameover=false;
+     }
+```
+
+Esta función restaurará el juego a su estado inicial, de forma que, al continuar, se vuelva a comenzar desde el principio.
+
+**página 27 del pdf**
+
+
+
 
 
 
