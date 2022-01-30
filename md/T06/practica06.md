@@ -171,7 +171,7 @@ Muy bien, pero qué ocurre si queremos que los elementos se comporten de una for
 ```css
      @media all and (max-width: 800px) {
           #contenedor .bloque {
-               /* Cuando el ancho sea inferior a 800px el elemento ser  un bloque */
+               /* Cuando el ancho sea inferior a 800px el elemento será un bloque */
                display: block !important;
                width: auto !important;
                }
@@ -230,14 +230,14 @@ Nuestro *html* será el siguiente:
 ```css
      @media all and (max-width: 600px){
           div, nav, header, aside, main{
-               /* Cuando el ancho sea inferior a 600px el elemento ser  un bloque */
+               /* Cuando el ancho sea inferior a 600px el elemento será un bloque */
                display: block !important;
-               /* Se ajustar n al ancho de la ventana */
+               /* Se ajustarán al ancho de la ventana */
                width: 100% !important;
                margin: auto !important;
-               /* La posici n ser  est tica (flujo normal del documento) */
+               /* La posición será estática (flujo normal del documento) */
                position: static !important;
-               /* los elementos dejar n de ser flotantes */
+               /* los elementos dejarán de ser flotantes */
                float: none !important;
           }
      }
@@ -252,7 +252,7 @@ Nuestro *html* será el siguiente:
      }
 
      .pagina{
-          /* la p gina ser  como m ximo de 1000px de ancho */
+          /* la página será como máximo de 1000px de ancho */
           max-width: 1000px;
           margin:auto;
           }
@@ -313,7 +313,7 @@ En las versiones para menores resoluciones o tamaños de pantalla el menú suele
 A continuación, veremos cómo podemos implementar este menú basándonos en un ejemplo. Tenemos el siguiente código html:
 ```html
      <nav>
-          <a href="#">Men </a>
+          <a href="#">Menú</a>
           <ul>
                <li><a href="#">Home</a></li>
                <li><a href="#">About</a></li>
@@ -432,4 +432,129 @@ En el código anterior, al pulsar el enlace menú se le aplicará la clase despl
 
 Podéis ver el ejemplo completamente funcional en la carpeta *nav* del fichero de recursos.
 
-**Ejercicios página 36 **
+# Ejercicios
+
+## Ejercicio 1 
+
+Vamos a modificar nuestro sitio web para convertirlo en un sitio web adaptable. Comenzaremos por añadir el meta *viewport* a todos los documentos: *index.html*, *videos.html*, *contacto.html* y *serpiente.html*.
+
+```html
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+```
+
+# Ejercicio 2
+
+En este ejercicio vamos a preparar nuestra página *index.html* para que se adapte al tamaño de la ventana.
+Trataremos de que nuestra página se vea correctamente en cualquier resolución de pantalla, con lo que conseguiremos que se vea bien en todos los dispositivos, ordenadores, portátiles, tablets y/o móviles. Para ello, crearemos tres **@media querys**:
+
+- La primera con un ancho máximo de 1024 píxeles. En esta **@media query** haremos los siguientes cambios:
+  + El **\<div id=”page”\>** tendrá un ancho del 90% y un ancho mínimo de 320 píxeles.
+  + El **\<header\>** tendrá un tamaño de fuente de 0.7em.
+  + Los **\<li\>** del menú existente en la barra de navegación *(#page>nav>ul>li)* tendrán los siguientes márgenes externos: 0% el superior, 8% el izquierdo y el derecho y 2% el inferior.
+- La segunda con un ancho máximo de 700 píxeles. En esta **@media query** haremos los siguientes cambios:
+  + Los **\<li\>** del menú existente en la barra de navegación *(#page>nav>ul>li)* tendrán los siguientes márgenes externos: 0% el superior, 4% el izquierdo y el derecho y 1% el inferior.
+- La tercera con un ancho máximo de 475 píxeles. En esta **@media query** prepararemos nuestra barra de navegación para que se oculte y se pueda desplegar como hemos visto en el tema. Antes de nada prepararemos nuestro documento:
+  + Añadiremos un enlace vacío dentro del **\<nav\>**, justo antes del **\<ul\>**: **\<a href="#"\>\</a\>**
+  + Enlazaremos el fichero de script *menu.js* que podéis encontrar en la carpeta scripts del fichero de recursos.
+     ```html
+          <script src="scripts/menu.js"></script>
+     ```
+  + En el fichero de estilos principal (*estilos.css*) ocultaremos (*display:none*) el enlace que hemos introducido anteriormente en el **\<nav\>** para que, inicialmente, este oculto y sólo aparezca cuando el ancho de la ventana sea inferior a 475 píxeles.
+  
+A continuación, crearemos la **@media query** siguiendo los pasos que se han explicado durante el tema. Tenemos que tener en cuenta que:
+- Los márgenes de los **\<li\>** de la barra de navegación estarán a 0.
+- El enlace vacío que hemos introducido tendrá las siguientes características:
+     + Tendrá la imagen de fondo *menu.png* que podéis encontrar en la carpeta *imgs* del fichero de recursos.
+     + La imagen no se repetirá y estará centrada y a 10 píxeles de distancia del borde superior.
+     + El ancho y alto del enlace será de 80px.
+     + El enlace tendrá unos márgenes externos superior e inferior de 0 y el izquierdo y derecho serán automáticos.
+     + Debes crear la clase .desplegado, tal y como hemos visto en el tema.
+
+Estas **@media querys** las crearemos en el fichero estilos.css. De esta forma, se aplicarán a todos los documentos de nuestra web.
+
+## Ejercicio 3
+
+En este ejercicio vamos a convertir en adaptable la página *videos.html*. Para ello, haremos los siguientes cambios en el fichero *reproductor.css*:
+- En el elemento *#reproductor*:
+     + Eliminaremos la flotación y lo mostraremos como bloque en línea (inline-block).
+     + El ancho será del 95% con un ancho máximo de 720 píxeles.
+     + Tendrá unos márgenes externos superior e inferior de 20 píxeles y el izquierdo y derecho serán automáticos.
+- Crearemos una regla de estilo para el elemento **\<video\>**:
+     + El ancho será del 95% con un ancho máximo de 720 píxeles.
+     + El alto será automático.
+     + Los márgenes externos serán de 5 píxeles.
+- En la barra de navegación del reproductor:
+     + Eliminaremos la flotación y lo mostraremos como bloque en línea (inline-block).
+     + Eliminaremos el ancho.
+     + La alineación vertical será arriba (*vertical-align:top*).
+- En el elemento #barra:
+     + El ancho será del 95% con un ancho máximo de 705 píxeles.
+     + Eliminaremos el margen interno.
+Finalmente, crearemos una **@media query** para un tamaño máximo de 970 píxeles. En esta **@media query**, simplemente, indicaremos que los botones de la barra de navegación del reproductor se muestren como bloques en línea (*inline-block*).
+Una vez finalizado el ejercicio nos encontraremos con un problema, y es que, si recordamos, en el tema 3 iniciíbamos la variable máximo en la función iniciar y le dábamos un valor de 700. Esta variable la utilizábamos para calcular el ancho de la barra de progreso del vídeo en las funciones redimensionaBarra y desplazarMedio. Ahora el ancho de esta barra no es fijo y dependerá del tamaño de la ventana, por lo que, en lugar de iniciar la variable máximo al principio, lo que haremos será calcular el ancho cada vez que lo necesitemos.
+Las funciones redimensionaBarra y desplazarMedio quedarán así:
+
+```javascript
+function redimensionaBarra() {
+     if(!medio.ended) {
+          var maximo=parseInt(getStyle('barra', "width"));
+          var total=parseInt(medio.currentTime*maximo / medio.duration);
+          progreso.style.width=total+'px';
+          }
+     else {
+          progreso.style.width='0px';
+          play.value='\u25BA';
+          window.clearInterval(bucle);
+     }
+}
+function desplazarMedio(e) {
+     if(!medio.paused && !medio.ended){
+          var ratonX=e.pageX-barra.offsetLeft;
+          var maximo=parseInt(getStyle('barra', "width"));
+          var nuevoTiempo=ratonX*medio.duration/maximo;
+          medio.currentTime=nuevoTiempo;
+          progreso.style.width=ratonX+'px';
+     }
+}
+```
+Sólo nos falta la función *getStyle*. Esta función es necesaria porque estamos obteniendo el valor de la propiedad de estilo width que no se inicia con un valor fijo, sino que tiene un valor relativo al tamaño del elemento que la contiene (recordad que hemos puesto un ancho del 95%). Para obtener el valor del ancho de la barra en un momento determinado, tenemos que llamar al método *window.getComputedStyle*. Este método nos devolverá el valor calculado de una propiedad en un momento determinado. Con todo esto, crearemos la función *getStyle* de la siguiente forma:
+```javascript
+     function getStyle(nombreElemento, nombrePropiedad){
+          var elemento = document.getElementById(nombreElemento);
+          return window.getComputedStyle(elemento,null).getPropertyValue(nombrePropiedad);
+     }
+```
+
+## Ejercicio 4
+
+En este ejercicio convertiremos en adaptable la página contacto.html. Para ello, haremos los siguientes cambios en el fichero contacto.css:
+- Crearemos una **@media query** para un tamaño máximo de 1024 píxeles en la que modificaremos las siguientes reglas:
+     + El elemento *#contenedorFormulario*:
+          -  Márgenes externos del 4%.
+          - Ancho del 58%.
+          - Márgenes internos superior e inferior del 2% e izquierdo y derecho del 4%.
+     + El elemento <h1> del #contenedorFormulario:
+          - Posición estática.
+          - Márgenes internos superior e inferior del 0% e izquierdo y derecho del 1%.
+          - Márgenes externos superior e inferior del 2% e izquierdo y derecho del 0%.
+     + Los input que no sean submit:
+          - Alto del 5%.
+          - Ancho del 55%.
+     + Los input que no sean submit cuando tienen el foco:
+          - Ancho del 61%.
+     + El elemento **\<textarea\>**:
+          - Ancho del 75%.
+     + El submit:
+          - Se mostrará como un elemento en bloque *(display:block)*.
+
+## Ejercicio 5
+Para terminar, convertiremos en adaptable la página *serpiente.html.* Para ello, haremos los siguientes cambios en el fichero *videojuego.css*:
+- Crearemos una **@media query** para un tamaño máximo de 1024 píxeles en la que modificaremos las siguientes reglas:
+     + El elemento #contenedorVideojuego:
+          - Márgenes externos del 5%.
+          - Márgenes internos superior e inferior del 2% e izquierdo y derecho del 5%.
+          - Ancho del 80%.
+     + El elemento **\<canvas\>**:
+          - Ancho del 80%.
+
+Con esto habremos terminado los ejercicios del tema. En el aula virtual podéis encontrar un vídeo de demostración en el que podéis ver cómo debería quedar nuestra página web después de finalizar los ejercicios. 
