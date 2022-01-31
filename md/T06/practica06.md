@@ -442,7 +442,7 @@ Vamos a modificar nuestro sitio web para convertirlo en un sitio web adaptable. 
      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 ```
 
-# Ejercicio 2
+## Ejercicio 2
 
 En este ejercicio vamos a preparar nuestra página *index.html* para que se adapte al tamaño de la ventana.
 Trataremos de que nuestra página se vea correctamente en cualquier resolución de pantalla, con lo que conseguiremos que se vea bien en todos los dispositivos, ordenadores, portátiles, tablets y/o móviles. Para ello, crearemos tres **@media querys**:

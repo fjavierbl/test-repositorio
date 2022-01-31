@@ -489,11 +489,10 @@ Para hacer esto correctamente en JavaScript, utilizaremos *prototipos* en lugar 
                }
      }
 
-Rectangle.prototype.fill=function(lienzo) {
-     if(lienzo!=null)
-          {
-          lienzo.fillStyle=this.color;
-          lienzo.fillRect(this.x,this.y,this.width,this.height);
+     Rectangle.prototype.fill=function(lienzo) {
+          if(lienzo!=null){
+               lienzo.fillStyle=this.color;
+               lienzo.fillRect(this.x,this.y,this.width,this.height);
           }
      }
 ```
@@ -570,7 +569,7 @@ Evidentemente, si queremos que el juego finalice cuando el jugador colisione con
      wall.push(new Rectangle(200,100,10,10,"#999"));
 ```
 
-Pâra dibujar los elementos pared:
+Para dibujar los elementos pared:
 ```javascript
      for(var i=0,l=wall.length;i<l;i++) {
           wall[i].fill(lienzo);
@@ -624,19 +623,183 @@ Para terminar, tenemos que implementar alguna manera de reiniciar el juego para 
           player.y=40;
           food.x=random(canvas.width/10-1)*10;
           food.y=random(canvas.height/10-1)*10;
-     lastPress=null;
-     gameover=false;
+          lastPress=null;
+          gameover=false;
      }
 ```
 
 Esta función restaurará el juego a su estado inicial, de forma que, al continuar, se vuelva a comenzar desde el principio.
 
-**página 27 del pdf**
+## El juego de la serpiente
 
+Ahora que ya conocemos las bases para hacer un juego, es hora de pulir algunos detalles y darle a nuestro código la forma de uno de los juegos clásicos: El juego de la serpiente.
+Lo esencial en el juego de la serpiente, es que el personaje principal va creciendo conforme se alimenta de las manzanas. Para lograr este efecto, utilizaremos un array igual que el de las paredes. Por tanto, sustituiremos de nuestro código la variable player por un array al que llamaremos body.
 
+```javascript
+//var player = new Rectangle(40,40,10,10,"#0f0");
+var body=[];
+```
 
+También tendremos que sustituir cada llamada a player por *body[0]*, que es la cabeza de la serpiente. Así pues, donde decíamos *player.x* y *player.y*, ahora diremos *body[0].x* y *body[0].y*.
+Para que nuestra serpiente tenga siempre la misma longitud al comienzo, debemos resetear el array cada vez que iniciemos el juego. Esto lo haremos en la función *reset* de esta forma:
 
+```javascript
+     body.length=0;
+     body.push(new Rectangle(40,40,10,10,"#0f0"));
+     body.push(new Rectangle(0,0,10,10,"#0f0"));
+     body.push(new Rectangle(0,0,10,10,"#0f0"));
+```
+Es importante que la primera parte del cuerpo (la cabeza) esté en la posición que deseemos que inicie. Las posiciones del resto del cuerpo se calcularán a partir de esta, por tanto, podemos inicializarlas a 0.
+El siguiente paso será dibujar la serpiente en la función paint, que ya no será sólo la cabeza, sino todo el cuerpo:
+```javascript
+     for(var i=0;i<body.length;i++){
+          body[i].fill(lienzo);
+     }
+```
 
+Para mover el cuerpo de la serpiente, haremos uso de un truco peculiar: lo moveremos de atrás hacia adelante, haciendo así un efecto de oruga, en que la cola va "empujando" el resto del cuerpo:
+```javascript
+     for(var i=body.length-1;i>0;i--) {
+          body[i].x=body[i-1].x;
+          body[i].y=body[i-1].y;
+     }
+```
+Una vez hecho esto, sólo queda mover la cabeza de la serpiente, y nos servirá exactamente el mismo código que teníamos antes para mover el player:
+```javascript
+     if(dir==DERECHA) body[0].x+=10;
+     if(dir==IZQUIERDA) body[0].x-=10;
+     if(dir==ARRIBA) body[0].y-=10;
+     if(dir==ABAJO) body[0].y+=10;
+```
+Para comprobar si el cuerpo choca con la cabeza, lo haremos del mismo modo que comprobábamos si el personaje chocaba con la pared:
 
+```javascript
+     for(var i=2;i< body.length;i++){
+          if(body[0].intersects(body[i])){
+               gameover=true;
+          }
+     }
+```
+
+Llegados a este punto, nos encontramos con un problema, y es que si cuando avanzamos hacia la derecha pulsamos la flecha izquierda, al cambiar el sentido de la marcha, la cabeza choca contra el cuerpo y el juego finaliza. Para solucionar este problema, ignoraremos la pulsación de la tecla inversa a la dirección actual:
+```javascript
+     if(lastPress==KEY_UP && dir != ABAJO) dir=ARRIBA;
+     if(lastPress==KEY_RIGHT && dir!= IZQUIERDA) dir=DERECHA;
+     if(lastPress==KEY_DOWN && dir!=ARRIBA) dir=ABAJO;
+     if(lastPress==KEY_LEFT && dir!=DERECHA) dir=IZQUIERDA;
+```
+El último paso que nos queda es hacer crecer a la serpiente. Esto se hace (lógicamente) cuando la cabeza choca contra la comida:
+```javascript
+     body.push(new Rectangle(0,0,10,10, "#0f0"));
+```
+
+## Elementos multimedia en los videojuegos
+
+El último punto que veremos sobre videojuegos con HTML5, será cómo incluir medios externos (imágenes y sonido).
+Actualmente nuestros rectángulos son de 10x10 píxeles, por lo tanto, tendremos que utilizar imágenes del mismo tamaño para que el juego no pierda sentido.
+Para representar cada una de las partes de la serpiente utilizaremos la imagen body.png del fichero de recursos, para representar la comida usaremos la imagen *fruit.png* y para la pared *Wall.png*. Se guardarán en la carpeta *imgs* de nuestra web, la ruta que ponemos para cargar la imagen será relativa al documento html donde se encuentra el canvas, no al fichero JavaScript donde se encuentra el código.
+Ahora, crearemos nuestras variables de imagen y les asignaremos la ruta a la fuente: 
+```javascript
+     var iBody=new Image();
+     var iFood=new Image();
+     iBody.src='imgs/body.png';
+     iFood.src='imgs/fruit.png';
+```
+Sólo nos queda modificar la función paint, comentando donde dibujamos los rectángulos del cuerpo, la comida y las paredes, y dibujando las imágenes en su lugar:
+```javascript
+     for(var i=0;i<body.length;i++){
+          lienzo.drawImage(iBody, body[i].x, body[i].y);
+     }
+     lienzo.drawImage(iFood, food.x, food.y);
+     for(var i=0,l=wall.length;i<l;i++){
+          lienzo.drawImage(iWall, wall[i].x, wall[i].y);
+     }
+```
+Veremos que nuestros gráficos aparecen en la pantalla en lugar de los rectángulos de colores. Podemos hacer algo similar para poner una imagen de fondo a nuestro juego.
+Por último, agreguemos algo de sonido. Cada vez que comamos una fruta, reproduciremos un sonido, y al morir, reproduciremos otro.
+La declaración será de esta forma:
+```javascript
+     var aComer=new Audio();
+     var aMorir=new Audio();
+     aComer.src='sounds/chomp.m4a';
+     aMorir.src='sounds/dies.m4a';
+```
+Para reproducir los sonidos insertaremos las siguientes líneas en las áreas de colisión correspondiente (con la manzana, con el cuerpo y con la pared):
+```javascript
+     aComer.play();
+     aMorir.play();
+```
+Como ya vimos en el tema 3, algunos navegadores soportan unos formatos de audio, mientras que otros navegadores soportan otros formatos diferentes. Por tanto, al agregar sonidos a nuestro juego, es posible que en algunos navegadores no se escuche (dependiendo del formato seleccionado).
+
+## Controlar la carga de medios externos
+Hemos visto anteriormente que no podemos dibujar una imagen en el lienzo si esta no está previamente cargada. En nuestro videojuego la carga será muy rápida, ya que los medios externos son de pequeño tamaño, pero no podemos obviar este punto, ya que en un videojuego algo más elaborado, que trabaje con imágenes o audio de mayor tamaño, tendríamos problemas con esto.
+Lo que haremos será pausar la carga del juego hasta que se hayan cargado todos los medios que se van a utilizar (tanto imágenes como sonidos).
+Los medios que necesitemos cargar de forma externa los almacenaremos en un array asociativo que llamaremos medios:
+```javascript
+     var medios = [];
+     //En este array iremos introduciendo las imágenes así:
+     medios['iBody'] = new Image();
+     medios['iBody'].src='imgs/body.png';
+     medios['iBody'].addEventListener("load", cargaMedio, false);
+```
+Como vemos, introducimos en el array un objeto de tipo Image, indicamos la propiedad src del mismo (dónde se encuentra la imagen que queremos mostrar) y asociamos un manejador para el evento load que llamará a la función *cargaMedio* que veremos a continuación.
+
+```javascript
+     var numMediosCargados = 0;
+     function cargaMedio(){numMediosCargados++;}
+```
+La funci n cargaMedio lo  nico que har  ser  incrementar una variable global numMediosCargados que habremos declarado previamente inicializ ndola a 0.
+Esto mismo lo haremos con la imagen iFood y con la imagen iWall (ambas llamar n a la misma funci n cargaMedio en el manejador del evento load).
+Por otro lado, tendremos que hacer algo muy parecido con los medios de tipo Audio:
+medios['aComer'] = new Audio();
+if(canPlayOgg())
+medios['aComer'].src="sounds/chomp.ogg";
+else
+medios['aComer'].src="sounds/chomp.m4a";
+medios['aComer'].addEventListener("canplaythrough", cargaMedio, false);
+Como vemos, los sonidos los guardaremos en el mismo array medios, y el manejador del evento canplaythrough llamará a la misma función *cargaMedio*.
+El siguiente paso será controlar la carga del juego, de forma que no se inicie hasta que todos los medios están cargados. Lo único que tendremos que hacer será comprobar en la función iniciar si el número de medios cargados (variable numMediosCargados) es igual a la longitud del array, en cuyo caso, iniciaremos el juego, mientras que, en caso contrario, llamaremos a una función cargando que hará una pequeña pausa y volverá a realizar la comprobación.
+El primer problema que nos encontramos es que no vamos a poder obtener la longitud del array medios, ya que se trata de un array asociativo y su propiedad length valdrá 0. Por ello, recurriremos a un pequeño truco: para obtener la longitud del array usaremos el método *getOwnPropertyNames()* (JavaScript 1.8.5). Dicho método nos devuelve un array escalar con las propiedades (índices) de nuestro objeto, por lo que podemos definir un método longitud que nos devuelva el número de elementos que tiene así:
+```javascript
+Array.longitud = function(obj){
+          return Object.getOwnPropertyNames(obj).length - 1;
+     }
+```
+y para obtener la longitud del array haremos esto:
+```javascript 
+     longitud = Array.longitud(medios);
+```
+Con todo esto, la función iniciar quedará como sigue:
+```javascript
+     function iniciar(){
+          canvas=document.getElementById('lienzo');
+          lienzo=canvas.getContext('2d');
+          if (numMediosCargados == Array.longitud(medios)){
+               run();
+               repaint();
+          }
+          else
+               {
+                    cargando();
+               }
+     }
+
+     function cargando() {
+          if (numMediosCargados < Array.longitud(medios)){
+               lienzo.fillStyle="#fff";
+               lienzo.fillRect(0,0,canvas.width,canvas.height);
+               lienzo.fillStyle="#0f0";
+               lienzo.fillText('Cargando ' + numMediosCargados
+                    + ' de ' + Array.longitud(medios),10,10);
+               setTimeout(cargando, 100);
+               }
+          else
+               {
+               iniciar();
+               }
+     }
+```
+En esta función, simplemente, se comprueba si el número de medios cargados coincide con la longitud del array, si no es as , se mostrar  el texto "cargando" se har  una pausa de 100ms y se volver  a comprobar, en caso contrario, se llamar  a la funci n iniciar y se iniciar  el juego.
+Para terminar, tendremos que sustituir en nuestro juego todos los usos de los objetos de las im genes y los sonidos anteriores por las referencias correspondientes del array medios
 
 

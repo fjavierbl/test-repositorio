@@ -109,6 +109,7 @@ Este formulario *registro.hml* lo podéis encontrar en el material de la prácti
 ![Formulario](img/formulario.png)
 
 Para ello utilizaremos los nuevos tipos de **\<input\>** ofrecidos por HTML5.
+
 - search
 - email
 - url
@@ -119,6 +120,7 @@ Para ello utilizaremos los nuevos tipos de **\<input\>** ofrecidos por HTML5.
 - date, month, week, time, datetime, datetime-local (min, max)
 
 Nuevos atributos para los campos del formulario:
+
 - required
 - placeholder
 - pattern
@@ -200,7 +202,9 @@ Cuando se pulse este botón, el formulario se enviará, pero sólo si todos sus 
 ```
 
 #### Validación en tiempo real
+
 Uno de los problemas que tenemos en los ejemplos anteriores es que la validación se realiza sólo cuando pulsamos el botón enviar. Para poder realizar la validación en tiempo real a medida que el usuario va rellenando los campos, tenemos que aprovechar los atributos provistos por el objeto *ValidityState*, al cual accedemos en todos los campos de formulario a través de su propiedad validity. Este objeto tendrá las siguientes propiedades booleanas:
+
 - valid: es true cuando el contenido actual del elemento es válido.
 - valueMissing: es true cuando el atributo required fue declarado y el campo está vacío.
 - typeMismatch: es true cuando la sintaxis de la entrada no corresponde con el tipo especificado (por ejemplo, si el texto insertado en un tipo de campo email no es una dirección de email válida).
@@ -236,7 +240,7 @@ De esta forma, el usuario sabrá si los datos son válidos a medida que los va i
 
 #### Aplicando estilos a campos requeridos inválidos
 
-Podemos aplicar estilos a elementos de formularios requeridos con la pseudo-clase *:required*. Tambi´wn podemos aplicar estilos a campos válidos o no válidos con las pseudo-classes *:valid* e *:invalid*.
+Podemos aplicar estilos a elementos de formularios requeridos con la pseudo-clase *:required*. También podemos aplicar estilos a campos válidos o no válidos con las pseudo-classes *:valid* e *:invalid*.
 
 ```css
      input { background: transparent no-repeat top right; }
@@ -344,6 +348,7 @@ form h1 {
 Según lo que hemos visto en el punto anterior, termina el formulario *registro.html* según las siguientes instrucciones:
 
 En este ejercicio vamos a implementar todas las funcionalidades explicadas sobre el formulario de registro que hemos trabajado a lo largo del tema. Las funcionalidades que debe incorporar son las siguientes:
+
 - Los siguientes campos serán obligatorios: nombre, email, password1, password2, fechaInicio.
 - El campo email será de tipo email y aceptará múltiples valores.
 - Cuando el formulario se cargue, el campo nombre recibirá el foco automáticamente.
@@ -417,7 +422,7 @@ Para que el formulario tome el aspecto que se muestra en la imagen, tendremos qu
    - Pondremos la imagen de fondo fondoForm.jpg, indicando que la imagen abarque todo el espacio de la sección.
    - Sus contenidos estarán centrados.
 - Contenedor del formulario:
-   - La posiciÓn serÁ relativa.
+   - La posición será relativa.
    - Se mostrará como inline-block.
    - Márgenes de 50px.
    - Ancho 600px.
